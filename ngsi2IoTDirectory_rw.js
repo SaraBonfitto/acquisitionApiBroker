@@ -414,9 +414,6 @@ function retrieveData(xtp, link, limit, offset){
 
 								}//end for j dev
 							
-							if(devAttr["format"]==undefined || devAttr["format"]==null){
-								devAttr["format"] = "JSON";
-							}
 							var toVerify ={"name": topic,"username": USER,"contextBroker": ORION_CB, "id": topic, "model": MODEL, "devicetype":devAttr["devicetype"], "protocol":ORION_PROTOCOL, "format":devAttr["format"], "frequency": FREQUENCY, "kind":KIND,"latitude":devAttr["latitude"], "longitude":devAttr["longitude"],"macaddress":devAttr["mac"],"k1":devAttr["k1"], "k2": devAttr["k2"],"deviceValues":attProperty};
 
 							var verify = verifyDevice(toVerify);

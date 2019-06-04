@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 const spawn = require('child_process').spawn;
 var registeredStub = [];
+var Promise = require('promise');
 
 
 //istanze
@@ -105,7 +106,6 @@ router.route('/ngsi')
 });
 router.route('/extract')
  .post(function(req, res) {
-	//console.log("path "+ req.body.path);
     var args = [];
 	//console.log("Snap kind : "+req.body.kind);
 
@@ -129,12 +129,14 @@ router.route('/extract')
 			req.body.apikey
 		];
 		
+	  //  console.log("args: "+args);
 
-	   const child_ngsi = spawn('node',args, {stdio: 'pipe' });
+		const child_ngsi = spawn('node',args, {stdio: 'pipe' });
 		var promiseRes = new Promise(function(resolve, reject){	
+
 			child_ngsi.stdout.on('data', function(data) {
 				let result = data.toString();
-				
+console.log("reeult "+result);
 				if(result.startsWith("{") || result.localeCompare("not found\n") == 0){
 					console.log("msg2" + result);
 					resolve(result);
